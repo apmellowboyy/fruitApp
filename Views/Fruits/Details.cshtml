@@ -1,0 +1,64 @@
+﻿@model bruhBruh.Models.Fruits
+
+@{
+    ViewData["Title"] = "Details";
+}
+<style>
+    h1{
+        text-align:center;
+        color:darkviolet;
+        font-size:2em;
+    }
+    h4{
+        color:orange;
+        text-align:center;
+    }
+    dl{
+        text-align:center;
+        color:pink;
+        font-size:2em;
+
+
+
+    }
+    dt{
+        text-align:center;
+        color:green;
+        border:4px solid black;
+    }
+    dd{
+        text-align:center;
+        color:purple;
+        border: 2px solid black;
+    }
+</style>
+<h1>Details</h1>
+
+<div>
+    <h4>Fruits</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Name">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

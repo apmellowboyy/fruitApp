@@ -1,0 +1,75 @@
+﻿@model IEnumerable<bruhBruh.Models.Fruits>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    h1{
+        text-align:center;
+        color:darkviolet;
+        font-size:2em;
+    }
+    h4{
+        color:orange;
+        text-align:center;
+    }
+    tr{
+        text-align:center;
+        color:pink;
+        font-size:2em;
+
+
+
+    }
+    th{
+        text-align:center;
+        color:green;
+        border:4px solid black;
+    }
+    td{
+        text-align:center;
+        color:purple;
+        border: 2px solid black;
+    }
+</style>
+<h1>Fruits</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Name">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Name">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Name">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
