@@ -1,0 +1,37 @@
+﻿@page
+@model bruhBruh.Views.Veggies.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>veggies</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.veggies.Weight)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.veggies.Weight)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.veggies.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.veggies.Size)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.veggies.Value)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.veggies.Value)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.veggies?.Name">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -11,18 +11,28 @@ namespace bruhBruh
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            // Register ApplicationDbContext for Identity (default connection)
+            var identityConnectionString = builder.Configuration.GetConnectionString("VeggieConnection") ?? throw new InvalidOperationException("Connection string 'VeggieConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer(identityConnectionString));
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+            // Register Identity services
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // Register controllers with views
             builder.Services.AddControllersWithViews();
 
+            // Register FruitContext with its own connection string
+            var fruitConnectionString = builder.Configuration.GetConnectionString("FruitConnection") ?? throw new InvalidOperationException("Connection string 'FruitConnection' not found.");
+            builder.Services.AddDbContext<FruitContext>(options => options.UseSqlServer(fruitConnectionString));
 
-            builder.Services.AddDbContext<FruitContext>(options => options.UseSqlServer(connectionString));
+            // Register VeggieContext with its own connection string
+            var veggieConnectionString = builder.Configuration.GetConnectionString("VeggieConnection") ?? throw new InvalidOperationException("Connection string 'VeggieConnection' not found.");
+            builder.Services.AddDbContext<VeggieContext>(options => options.UseSqlServer(veggieConnectionString));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,7 +43,6 @@ namespace bruhBruh
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
